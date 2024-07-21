@@ -30,6 +30,11 @@ app.get("/patient", (req,res)=>{
 })
 
 
+app.get("/doctor/:id", (req, res)=>{
+    res.render("doctor.ejs", {id: req.params.id});
+})
+
+
 
 
 
