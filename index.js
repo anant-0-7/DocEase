@@ -21,6 +21,14 @@ app.get("/", (req,res)=>{
 
 })
 
+app.get("/doctor", (req,res)=>{
+    res.render("login_doctor.ejs");
+})
+
+app.get("/patient", (req,res)=>{
+    res.render("login_patient.ejs");
+})
+
 
 
 
