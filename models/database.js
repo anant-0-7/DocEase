@@ -36,20 +36,17 @@ const userSchema=new mongoose.Schema({
     ongoingPatient: {
         _id: String,
         appointmentNo: Number,
-        appointmentDate: Date
+        appointmentTime: String,
     },
     upcomingPatients:[{
         _id: String,
         appointmentNo:Number,
-        appointmentDate:Date,
-        
-        ref:"User"
+        appointmentTime: String,
     }],
     finishedPatients:[{
         _id: String,
         appointmentNo:Number,
-        appointmentTime:Date,
-        ref:"User"
+        appointmentTime:String,
     }]
 
 });
