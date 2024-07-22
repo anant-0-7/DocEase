@@ -5,9 +5,10 @@ const session=require("express-session");
 const flash=require("connect-flash");
 const passport=require("passport");
 const path=require("path");
-const {initializePassport}=require("./passportConfig.js");
+const {initializePassport,isAuthenticatedDoctor,isAuthenticatedPatient}=require("./passportConfig.js");
 const wrapAsync=require("./utils/wrapAsync.js");
 const ExpressError=require("./utils/ExpressError.js");
+
 
 const port = 3000;
 const app = express();
@@ -72,21 +73,28 @@ app.get("/patient", (req,res)=>{
 
 
 
-app.get("/doctor/:id", async (req, res)=>{
+app.get("/doctor/:id", isAuthenticatedDoctor,wrapAsync(async (req, res)=>{
     var id = req.params.id;
-    var doc = await User.findById(id).exec();
+    var doc = await User.findById(id);
     res.render("doctor.ejs", {id: req.params.id, doc:doc});
+}));
+
+
+
+
+
+
+
+
+
+app.all("*",(req,res,next)=>{
+    next(new ExpressError(404,"Page not Found!"));
+});
+app.use((err,req,res,next)=>{
+    let {status=500,message="Something went Wrong"}=err;
+    res.status(status).render("/error.ejs",{err});
+    //res.status(status).send(message);
 })
-
-
-
-
-
-
-
-
-
-
 
 
 app.listen(port, () => {
