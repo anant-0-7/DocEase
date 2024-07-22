@@ -20,6 +20,11 @@ const userSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
+    usertype:{
+        type:String,
+        enum:["patient","doctor"],
+        default:"patient",
+    },
     age:Number,
     bloodGrp:String,
     daytime:String,

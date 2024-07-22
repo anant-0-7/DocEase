@@ -1,22 +1,7 @@
 <%layout("/layouts/boilerplate.ejs")%>
+<link rel="stylesheet" href="/styles/login.css">
     <body class="d-flex align-items-center py-4 bg-body-tertiary">
-        <style>
-            form{
-                text-align: center;
-                width: 50vh;
-                
-            }
-
-            .h3{
-                color: white;
-            }
-            .container{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-            }
-        </style>
+        
         <div class = "container">
             <form action="/doctor" method="POST" novalidate class="needs-validation">
                 <h1 class="h3 mb-3 fw-normal">Please Log in</h1>
