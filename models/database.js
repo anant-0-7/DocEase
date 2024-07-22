@@ -43,13 +43,11 @@ const userSchema=new mongoose.Schema({
         appointmentNo:Number,
         appointmentDate:Date,
         
-        ref:"User"
     }],
     finishedPatients:[{
         _id: String,
         appointmentNo:Number,
         appointmentTime:Date,
-        ref:"User"
     }]
 
 });
