@@ -1,0 +1,52 @@
+<%layout("/layouts/boilerplate.ejs")%>
+<body>
+    <style>
+        #form{
+            margin-top: 35vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #form button{
+            margin: 10px;
+        }
+        #form1 button{
+            margin: 10px;
+        }
+
+        .btn{
+            width: 100%;
+        }
+
+        .heading{
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+
+        }
+    </style>
+
+    <h2 class = "heading">
+        Welcome! Choose Your Path
+    </h2>
+    
+    <form method = "GET" id="form" action="/doctor">
+        <div class="d-grid col-5 mx-auto">
+            <button class="btn btn-outline-light btn-lg">I am a Doctor</button>
+
+        </div>
+    </form>
+    <form method = "GET" id="form1" action="/patient">
+        <div class="d-grid col-5 mx-auto">
+            <button class="btn btn-outline-light btn-lg">I am a Patient</button>
+
+        </div>
+    </form>
+
+    
+
+
+</body>
