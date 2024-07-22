@@ -3,7 +3,7 @@ const mongoose=require("mongoose");
 exports.connectMongoose=async()=>{
     await mongoose.connect('mongodb://127.0.0.1:27017/healthapp')
     .then((e)=>console.log("Connected to MongoDB"))
-    .catch((e)=>console.log(e));
+    .catch((e)=>console.error(e));
 }
 
 const userSchema=new mongoose.Schema({
