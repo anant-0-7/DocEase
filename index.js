@@ -61,7 +61,7 @@ app.get("/doctor", (req,res)=>{
 app.post("/patient",passport.authenticate("local",{failureRedirect:"/patient",failureFlash:true}),wrapAsync(async(req,res)=>{
     req.flash("success","Welcome to BookaDR,You are Logged in.");
     let userid=req.user._id;
-    
+
     let redirectUrl=`/patient/${userid}`
     res.redirect(redirectUrl);
 }));
@@ -72,9 +72,10 @@ app.get("/patient", (req,res)=>{
 
 
 
-app.get("/doctor/:id", (req, res)=>{
-    var data = req.user;
-    res.render("doctor.ejs", {id: req.params.id});
+app.get("/doctor/:id", async (req, res)=>{
+    var id = req.params.id;
+    var doc = await User.findById(id).exec();
+    res.render("doctor.ejs", {id: req.params.id, doc:doc});
 })
 
 
@@ -86,9 +87,7 @@ app.get("/doctor/:id", (req, res)=>{
 
 
 
-app.all("*",(req,res,next)=>{
-    next(new ExpressError(404,"Page not Found!"));
-});
+
 
 app.listen(port, () => {
   console.log(`App is running on PORT ${port}`);
