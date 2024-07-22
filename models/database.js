@@ -27,19 +27,28 @@ const userSchema=new mongoose.Schema({
     },
     age:Number,
     bloodGrp:String,
-    daytime:String,
-    appointmentNo:Number,
-    appointmentTime:Date,
+    starttime:String,
+    
     contact:{
         type:String,
         required:true,
     },
+    ongoingPatient: {
+        _id: String,
+        appointmentNo: Number,
+        appointmentDate: Date
+    },
     upcomingPatients:[{
-        type:mongoose.Schema.Types.ObjectId,
+        _id: String,
+        appointmentNo:Number,
+        appointmentDate:Date,
+        
         ref:"User"
     }],
     finishedPatients:[{
-        type:mongoose.Schema.Types.ObjectId,
+        _id: String,
+        appointmentNo:Number,
+        appointmentTime:Date,
         ref:"User"
     }]
 

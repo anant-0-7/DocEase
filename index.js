@@ -20,14 +20,14 @@ const sessionOptions={
 
 app.use(flash());
 app.use(session(sessionOptions));
+
 connectMongoose();
 initializePassport(passport);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
-app.set("view engine","ejs");
-app.set("views",path.join(__dirname,"/views"));
 app.use(express.static(path.join(__dirname,"public")));
 
 
@@ -61,6 +61,7 @@ app.get("/doctor", (req,res)=>{
 app.post("/patient",passport.authenticate("local",{failureRedirect:"/patient",failureFlash:true}),wrapAsync(async(req,res)=>{
     req.flash("success","Welcome to BookaDR,You are Logged in.");
     let userid=req.user._id;
+    
     let redirectUrl=`/patient/${userid}`
     res.redirect(redirectUrl);
 }));
