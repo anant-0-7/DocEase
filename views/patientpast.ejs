@@ -31,14 +31,15 @@
       <div id = "container">
 
         <% if(arr.length){ arr.forEach(element => {%>
+          <% if(element.finishedPatients.length){ element.finishedPatients.forEach(ele => {%>
         <div class = "card-container">
             <div class="card text-bg-light" style="width: 18rem;">
                 <div class="card-body">
                   <h3 class="card-title bold"><%= element.name%></h3>
                   <h4 class="card-title bold"><%= element.hospitalName%></h4>
                   <h5 class="card-title bold"><%= element.contact%></h5>
-                  <p class="card-text"><span class = "bold">Appointment No.: </span><%= element.finishedPatients[0].appointmentNo%></p>
-                  <p class="card-text"><span class = "bold">Appointment Time: </span><%= element.finishedPatients[0].appointmentTime%></p>
+                  <p class="card-text"><span class = "bold">Appointment No.: </span><%= ele.appointmentNo%></p>
+                  <p class="card-text"><span class = "bold">Appointment Time: </span><%= ele.appointmentTime%></p>
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item"><a class = "bold" href="#">View Receipt</a></li>
@@ -47,7 +48,7 @@
               </div>
     
         </div>
-
+        <%})}%>
         <% })} else { %>
 
             <p class = "bold">Nothing to show here</p>
