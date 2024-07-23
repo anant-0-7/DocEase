@@ -171,7 +171,13 @@ app.get("/logout",(req,res,next)=>{
     })
 })
 
-
+app.all("*",(req,res,next)=>{
+    next(new ExpressError(404,"Page not Found!"));
+});
+app.use((err,req,res,next)=>{
+    let {status=500,message="Something went Wrong"}=err;
+    res.status(status).render("error.ejs",{err});
+})
 
 app.listen(port, () => {
   console.log(`App is running on PORT ${port}`);
