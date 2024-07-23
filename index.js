@@ -164,7 +164,7 @@ app.get("/patient/:id", isAuthenticatedPatient,wrapAsync(async (req, res)=>{
         element.upcomingPatients=element.upcomingPatients.filter((ele)=>ele._id==id)
     })
     console.log(doctors)
-    res.render("patientupcoming.ejs",{id:id,arr:doctors,prev:false,name:patient.name,patient});
+    res.render("patient.ejs",{id:id,arr:doctors,prev:false,name:patient.name,patient});
     
 }));
 app.get("/patient/prev/:id", isAuthenticatedPatient,wrapAsync(async (req, res)=>{
@@ -175,7 +175,7 @@ app.get("/patient/prev/:id", isAuthenticatedPatient,wrapAsync(async (req, res)=>
         element.finishedPatients=element.finishedPatients.filter((ele)=>ele._id==id)
     })
     console.log(doctors)
-    res.render("patientpast.ejs",{id:id,arr:doctors,prev:true,name:patient.name,patient});
+    res.render("patient.ejs",{id:id,arr:doctors,prev:true,name:patient.name,patient});
     
 }));
 
@@ -189,6 +189,14 @@ app.get("/patient/:id1/view/:id2",isAuthenticatedPatient,wrapAsync(async (req, r
 
 
 
+app.get("/patient/book/:id", async(req, res)=>{
+
+    var id = req.params.id;
+    var doctors = await User.find({usertype:doctors});
+
+
+
+})
 
 
 

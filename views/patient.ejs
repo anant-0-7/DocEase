@@ -38,18 +38,25 @@
                   <h3 class="card-title bold"><%= element.name%></h3>
                   <h4 class="card-title bold"><%= element.hospitalName%></h4>
                   <h5 class="card-title bold"><%= element.contact%></h5>
-                  <p class="card-text"><span class = "bold">Appointment No.: </span><%= element.upcomingPatients[0].appointmentNo%></p>
-                  <p class="card-text"><span class = "bold">Appointment Time: </span><%= element.upcomingPatients[0].appointmentTime%></p>
+                  
                 </div>
-                <ul class="list-group list-group-flush">
-                  <% if(element.ongoingPatient) {%>
-                    <li class="list-group-item"><span class = "bold">Current AppointmentNo.: </span> <%=element.ongoingPatient.appointmentNo%></li>
-                    <% } 
-                    else { %>
-                      <li class="list-group-item"><span class = "bold">Current AppointmentNo.: </span> 0</li>
-                  <% } %>
-                </ul>
+                <ul class="list-group list-group-flush text-bg-light">
+                  <li class="list-group-item"><sp an class = "bold">Appointment No.: </span><%= element.finishedPatients[0].appointmentNo%></li>
+                  <li class="list-group-item"><span class = "bold">Appointment Time: </span><%= element.finishedPatients[0].appointmentTime%></li>
                 
+                </ul>
+                <div class = "card-body pb-0">
+                  <% if(prev) {%>
+                  <p class="list-group-item"><a class = "bold btn btn-primary" href="#">View Receipt</a></p>
+                  <% } else{ %>
+                    <% if(element.ongoingPatient) {%>
+                      <p class="list-group-item"><span class = "bold">Current AppointmentNo.: </span> <%=element.ongoingPatient.appointmentNo%></p>
+                      <% } else { %>
+                      
+                        <p class="list-group-item"><span class = "bold">Current AppointmentNo.: </span> 0</p>
+                    <% }} %>
+                </div>
+
               </div>
     
         </div>
