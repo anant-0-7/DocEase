@@ -140,6 +140,22 @@ app.get("/doctor/prev/:id", async(req, res)=>{
     res.render("doctor_other.ejs", {id:id, name:doc.name, prev: true, arr: arr})
 });
 
+app.get("/doctor/upcoming/:id", async(req, res)=>{
+    var id = req.params.id;
+    var doc =  await User.findById(id);
+    var arr = [];
+
+    for(const element of doc.upcomingPatients){
+        var temp = await User.findById(element._id).exec();
+        temp.appointmentTime = element.appointmentTime;
+        temp.appointmentNo = element.appointmentNo;
+        arr.push(temp);
+    }
+
+    console.log(arr);
+    res.render("doctor_other.ejs", {id:id, name:doc.name, prev: false, arr: arr})
+})
+
 
 
 
@@ -155,13 +171,7 @@ app.get("/logout",(req,res,next)=>{
     })
 })
 
-app.all("*",(req,res,next)=>{
-    next(new ExpressError(404,"Page not Found!"));
-});
-app.use((err,req,res,next)=>{
-    let {status=500,message="Something went Wrong"}=err;
-    res.status(status).render("/error.ejs",{err});
-})
+
 
 app.listen(port, () => {
   console.log(`App is running on PORT ${port}`);

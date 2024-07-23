@@ -13,10 +13,10 @@
           <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a href="/doctor/<%=id%>" class="nav-link px-2">Ongoing</a></li>
             <li> <% if(prev) {%><a href="/doctor/prev/<%=id%>" class="nav-link px-2  link-secondary">Previous</a></li>
-            <li><a href="/doctor/upcoming/<%=id%>" class="nav-link px-2">Completed</a></li>
+            <li><a href="/doctor/upcoming/<%=id%>" class="nav-link px-2">Upcoming</a></li>
             <% } else { %>
                 <a href="/doctor/prev/<%=id%>" class="nav-link px-2">Previous</a></li>
-                <li><a href="/doctor/upcoming/<%=id%>" class="nav-link px-2 link-secondary">Completed</a></li>
+                <li><a href="/doctor/upcoming/<%=id%>" class="nav-link px-2 link-secondary">Upcoming</a></li>
             <% } %>
           </ul>
     
@@ -47,7 +47,11 @@
     
         </div>
 
-        <% })} %>
+        <% })} else { %>
+
+            <p class = "bold">Nothing to show here</p>
+        
+        <% } %>
 
 
       </div>
