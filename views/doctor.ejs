@@ -3,33 +3,57 @@
 <body>
     
 
-    <h1>Ongoing appointments</h1>
+  <div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <div class="col-md-3 mb-2 mb-md-0">
+        <a href="/doctor/<%=id%>" class="d-inline-flex link-body-emphasis text-decoration-none">
+          <span class="fs-4">BookaDR</span>
+        </a>
+      </div>
 
-    <form method = "GET" class = "btn-container">
-        <input type = "submit" class = "btn btn-outline-info" formaction ="/doctor/previous/<%=id%>"  value = "Previous Appointments">
-        <input type = "submit" class = "btn btn-outline-light" formaction ="/doctor/upcoming/<%=id%>" value = "Upcoming Appointments" >
-        
-    </form>
-    
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="/doctor/<%=id%>" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a href="/doctor/previous/<%=id%>" class="nav-link px-2">Previous</a></li>
+        <li><a href="/doctor/upcoming/<%=id%>" class="nav-link px-2">Completed</a></li>
+      </ul>
+
+      <div class="col-md-3 text-end">
+        <button type="button" class="btn btn-primary">Logout</button>
+      </div>
+    </header>
+  </div>
+
+    <h2>Ongoing appointment</h2>
+
+    <% if (patient) {%>
     <div class = "card-container">
         <div class="card text-bg-light" style="width: 18rem;">
-            <img src="" class="card-img-top" alt="">
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <h3 class="card-title bold"><%= patient.name%></h3>
+              <p class="card-text"><span class = "bold">Appointment No.: </span><%= doc.ongoingPatient.appointmentNo%></p>
+              <p class="card-text"><span class = "bold">Appointment Time: </span><%= doc.ongoingPatient.appointmentTime%></p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
+              <li class="list-group-item"><span class = "bold">Age: </span> <%=patient.age%></li>
+              <li class="list-group-item"><span class = "bold">Blood Group: </span> <%=patient.bloodGrp%></li>
+              <li class="list-group-item"><span class = "bold">Contact No: </span> <%=patient.contact%></li>
             </ul>
             <div class="card-body">
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
+              <form method = "GET" action = "/doctor/done/<%=id%>">
+                <input type = "submit" class="card-link btn btn-success" value = "Done">
+              </form>
             </div>
           </div>
 
     </div>
+
+    <%} else { %>
+
+      <p id = "none">You have no current patients</p>
+
+     
+      <%}%>
+      
 
         
 

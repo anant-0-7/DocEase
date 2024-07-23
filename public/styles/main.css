@@ -1,17 +1,17 @@
 
 
-h1{
+h2{
     color: white;
     text-align: center;
-    margin: 50px;
+    margin-bottom: 50px;
     font-weight: bold;
 }
 
-.btn-container{
-    display:flex;
-    justify-content: space-around;
-    margin-bottom: 50px;
+#none{
+    text-align: center;
+    font-weight: bold;
 }
+
 
 
 .card-container{
@@ -19,4 +19,8 @@ h1{
     width: 100%;
     justify-content: center;
     text-align: center;
+}
+
+.bold{
+    font-weight: bold;
 }

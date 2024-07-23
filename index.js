@@ -76,25 +76,55 @@ app.get("/patient", (req,res)=>{
 app.get("/doctor/:id", isAuthenticatedDoctor,wrapAsync(async (req, res)=>{
     var id = req.params.id;
     var doc = await User.findById(id);
-    res.render("doctor.ejs", {id: req.params.id, doc:doc});
+    console.log(doc);
+    var patient;
+    if(doc.ongoingPatient) patient = await User.findById(doc.ongoingPatient._id);
+    else patient = false;
+    res.render("doctor.ejs", {id: req.params.id, patient: patient, doc:doc});
 }));
 
 
+app.get("/doctor/done/:id", async (req, res)=>{
+    var id = req.params.id;
+    var doc = await User.findById(id);
+    let arr = doc.upcomingPatients;
+    let nextPatient = {};
+    if(arr.length) {
+        nextPatient = arr[0];
+        arr.shift();
+    }
+
+    let update = await User.updateOne({_id: id}, {upcomingPatients: arr});
+    console.log(update.acknowledged); // Boolean indicating everything went smoothly.
+
+    if(doc.ongoingPatient){
+        let prevArr = doc.finishedPatients;
+        prevArr.push(doc.ongoingPatient);
+        let update2 = await User.updateOne({_id: id}, {finishedPatients: prevArr});
+        console.log(update2.acknowledged);
+
+    }
+
+    let update3 = await User.updateOne({_id: id}, {ongoingPatient: nextPatient});
+    console.log(update3.acknowledged);
+    
+
+    
+
+    res.redirect(`/doctor/${id}`);
 
 
-
-
-
-
-
-app.all("*",(req,res,next)=>{
-    next(new ExpressError(404,"Page not Found!"));
-});
-app.use((err,req,res,next)=>{
-    let {status=500,message="Something went Wrong"}=err;
-    res.status(status).render("/error.ejs",{err});
-    //res.status(status).send(message);
 })
+
+
+
+
+
+
+
+
+
+
 
 
 app.listen(port, () => {
