@@ -16,7 +16,12 @@ const app = express();
 const sessionOptions={
     secret:"SECRET",
     resave:false,
-    saveUninitialized:false,
+    saveUninitialized:true,
+    cookie:{
+        expires:Date.now()+1000*60*60*24*3,
+        maxAge:1000*60*60*24*3,
+        httpOnly:true
+    }
 };
 
 app.use(flash());
@@ -76,7 +81,6 @@ app.get("/patient", (req,res)=>{
 app.get("/doctor/:id", isAuthenticatedDoctor,wrapAsync(async (req, res)=>{
     var id = req.params.id;
     var doc = await User.findById(id);
-    console.log(doc);
     var patient;
     if(doc.ongoingPatient) patient = await User.findById(doc.ongoingPatient._id);
     else patient = false;
@@ -84,7 +88,7 @@ app.get("/doctor/:id", isAuthenticatedDoctor,wrapAsync(async (req, res)=>{
 }));
 
 
-app.get("/doctor/done/:id", async (req, res)=>{
+app.get("/doctor/done/:id", wrapAsync(async (req, res)=>{
     var id = req.params.id;
     var doc = await User.findById(id);
     let arr = doc.upcomingPatients;
@@ -114,18 +118,34 @@ app.get("/doctor/done/:id", async (req, res)=>{
     res.redirect(`/doctor/${id}`);
 
 
+}));
+
+
+
+
+
+
+
+
+
+
+app.get("/logout",(req,res,next)=>{
+    req.logout((err)=>{
+        if(err){
+            return next(err);
+        }
+        req.flash("success","You are Logged out successfully");
+        res.redirect("/");
+    })
 })
 
-
-
-
-
-
-
-
-
-
-
+app.all("*",(req,res,next)=>{
+    next(new ExpressError(404,"Page not Found!"));
+});
+app.use((err,req,res,next)=>{
+    let {status=500,message="Something went Wrong"}=err;
+    res.status(status).render("/error.ejs",{err});
+})
 
 app.listen(port, () => {
   console.log(`App is running on PORT ${port}`);
