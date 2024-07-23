@@ -123,7 +123,7 @@ app.get("/doctor/done/:id", wrapAsync(async (req, res)=>{
 
 
 
-app.get("/doctor/prev/:id", async(req, res)=>{
+app.get("/doctor/prev/:id",isAuthenticatedDoctor, wrapAsync(async(req, res)=>{
     var id = req.params.id;
     var doc =  await User.findById(id);
     var arr = [];
@@ -137,10 +137,10 @@ app.get("/doctor/prev/:id", async(req, res)=>{
     
 
     console.log(arr);
-    res.render("doctor_other.ejs", {id:id, name:doc.name, prev: true, arr: arr})
-});
+    res.render("doctor_other.ejs", {id:id, name:doc.name,hospitalName:doc.hospitalName, prev: true, arr: arr})
+}));
 
-app.get("/doctor/upcoming/:id", async(req, res)=>{
+app.get("/doctor/upcoming/:id", isAuthenticatedDoctor,wrapAsync(async(req, res)=>{
     var id = req.params.id;
     var doc =  await User.findById(id);
     var arr = [];
@@ -153,9 +153,31 @@ app.get("/doctor/upcoming/:id", async(req, res)=>{
     }
 
     console.log(arr);
-    res.render("doctor_other.ejs", {id:id, name:doc.name, prev: false, arr: arr})
-})
+    res.render("doctor_other.ejs", {id:id, name:doc.name,hospitalName:doc.hospitalName, prev: false, arr: arr})
+}))
 
+app.get("/patient/:id", isAuthenticatedPatient,wrapAsync(async (req, res)=>{
+    var id = req.params.id;
+    var patient = await User.findById(id);
+    var doctors=await User.find( { upcomingPatients: { $elemMatch: { _id:id}}});
+    doctors.forEach(element=>{
+        element.upcomingPatients=element.upcomingPatients.filter((ele)=>ele._id==id)
+    })
+    console.log(doctors)
+    res.render("patientupcoming.ejs",{id:id,arr:doctors,prev:false,name:patient.name,patient});
+    
+}));
+app.get("/patient/prev/:id", isAuthenticatedPatient,wrapAsync(async (req, res)=>{
+    var id = req.params.id;
+    var patient = await User.findById(id);
+    var doctors=await User.find( { finishedPatients: { $elemMatch: { _id:id}}});
+    doctors.forEach(element=>{
+        element.finishedPatients=element.finishedPatients.filter((ele)=>ele._id==id)
+    })
+    console.log(doctors)
+    res.render("patientpast.ejs",{id:id,arr:doctors,prev:true,name:patient.name,patient});
+    
+}));
 
 
 

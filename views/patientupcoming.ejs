@@ -1,0 +1,65 @@
+<%- include("partials/boilerplate.ejs") %>
+<link rel = "stylesheet" href = "/styles/doc.css">
+<body>
+    
+    <div class="container">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+          <div class="col-md-3 mb-2 mb-md-0">
+            <a href="/patient/<%=id%>" class="d-inline-flex link-body-emphasis text-decoration-none">
+              <span class="fs-5">Hi, <%=name%></span>
+            </a>
+          </div>
+    
+          <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            
+            <li> <% if(prev) {%><a href="/patient/prev/<%=id%>" class="nav-link px-2  link-secondary">Past appointments</a></li>
+            <li><a href="/patient/<%=id%>" class="nav-link px-2">Upcoming appointments</a></li>
+            <% } else { %>
+                <a href="/patient/prev/<%=id%>" class="nav-link px-2">Past appointments</a></li>
+                <li><a href="/patient/<%=id%>" class="nav-link px-2 link-secondary">Upcoming appointments</a></li>
+            <% } %>
+            <li><a href="/patient/book/<%=id%>" class="nav-link px-2">Book an appointment</a></li>
+          </ul>
+    
+          <div class="col-md-3 text-end">
+            <button type="button" class="btn btn-primary"><a class="nav-link" href="/logout"><b>LogOut</b></a></button>
+          </div>
+        </header>
+      </div>
+
+
+      <div id = "container">
+
+        <% if(arr.length){ arr.forEach(element => {%>
+        <div class = "card-container">
+            <div class="card text-bg-light" style="width: 18rem;">
+                <div class="card-body">
+                  <h3 class="card-title bold"><%= element.name%></h3>
+                  <h4 class="card-title bold"><%= element.hospitalName%></h4>
+                  <h5 class="card-title bold"><%= element.contact%></h5>
+                  <p class="card-text"><span class = "bold">Appointment No.: </span><%= element.upcomingPatients[0].appointmentNo%></p>
+                  <p class="card-text"><span class = "bold">Appointment Time: </span><%= element.upcomingPatients[0].appointmentTime%></p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <% if(element.ongoingPatient) {%>
+                    <li class="list-group-item"><span class = "bold">Current AppointmentNo.: </span> <%=element.ongoingPatient.appointmentNo%></li>
+                    <% } 
+                    else { %>
+                      <li class="list-group-item"><span class = "bold">Current AppointmentNo.: </span> 0</li>
+                  <% } %>
+                </ul>
+                
+              </div>
+    
+        </div>
+
+        <% })} else { %>
+
+            <p class = "bold">Nothing to show here</p>
+        
+        <% } %>
+
+
+      </div>
+
+</body>

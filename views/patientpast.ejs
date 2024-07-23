@@ -5,19 +5,20 @@
     <div class="container">
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
           <div class="col-md-3 mb-2 mb-md-0">
-            <a href="/doctor/<%=id%>" class="d-inline-flex link-body-emphasis text-decoration-none">
-              <span class="fs-5">Hi, <%=name%>-<%=hospitalName %></span>
+            <a href="/patient/<%=id%>" class="d-inline-flex link-body-emphasis text-decoration-none">
+              <span class="fs-5">Hi, <%=name%></span>
             </a>
           </div>
     
           <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="/doctor/<%=id%>" class="nav-link px-2">Ongoing</a></li>
-            <li> <% if(prev) {%><a href="/doctor/prev/<%=id%>" class="nav-link px-2  link-secondary">Previous</a></li>
-            <li><a href="/doctor/upcoming/<%=id%>" class="nav-link px-2">Upcoming</a></li>
+            
+            <li> <% if(prev) {%><a href="/patient/prev/<%=id%>" class="nav-link px-2  link-secondary">Past appointments</a></li>
+            <li><a href="/patient/<%=id%>" class="nav-link px-2">Upcoming appointments</a></li>
             <% } else { %>
-                <a href="/doctor/prev/<%=id%>" class="nav-link px-2">Previous</a></li>
-                <li><a href="/doctor/upcoming/<%=id%>" class="nav-link px-2 link-secondary">Upcoming</a></li>
+                <a href="/patient/prev/<%=id%>" class="nav-link px-2">Past appointments</a></li>
+                <li><a href="/patient/<%=id%>" class="nav-link px-2 link-secondary">Upcoming appointments</a></li>
             <% } %>
+            <li><a href="/patient/book/<%=id%>" class="nav-link px-2">Book an appointment</a></li>
           </ul>
     
           <div class="col-md-3 text-end">
@@ -34,13 +35,13 @@
             <div class="card text-bg-light" style="width: 18rem;">
                 <div class="card-body">
                   <h3 class="card-title bold"><%= element.name%></h3>
-                  <p class="card-text"><span class = "bold">Appointment No.: </span><%= element.appointmentNo%></p>
-                  <p class="card-text"><span class = "bold">Appointment Time: </span><%= element.appointmentTime%></p>
+                  <h4 class="card-title bold"><%= element.hospitalName%></h4>
+                  <h5 class="card-title bold"><%= element.contact%></h5>
+                  <p class="card-text"><span class = "bold">Appointment No.: </span><%= element.finishedPatients[0].appointmentNo%></p>
+                  <p class="card-text"><span class = "bold">Appointment Time: </span><%= element.finishedPatients[0].appointmentTime%></p>
                 </div>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item"><span class = "bold">Age: </span> <%=element.age%></li>
-                  <li class="list-group-item"><span class = "bold">Blood Group: </span> <%=element.bloodGrp%></li>
-                  <li class="list-group-item"><span class = "bold">Contact No: </span> <%=element.contact%></li>
+                  <li class="list-group-item"><a class = "bold" href="#">View Receipt</a></li>
                 </ul>
                 
               </div>
