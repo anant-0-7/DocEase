@@ -39,12 +39,16 @@
                   <h3 class="card-title bold"><%= element.name%></h3>
                   <h4 class="card-title bold"><%= element.hospitalName%></h4>
                   <h5 class="card-title bold"><%= element.contact%></h5>
-                  <p class="card-text"><span class = "bold">Appointment No.: </span><%= ele.appointmentNo%></p>
-                  <p class="card-text"><span class = "bold">Appointment Time: </span><%= ele.appointmentTime%></p>
                 </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item"><a class = "bold" href="#">View Receipt</a></li>
+
+                <ul class="list-group list-group-flush text-bg-light">
+                  <li class="list-group-item"><span class = "bold">Appointment No.: </span><%= ele.appointmentNo%></li>
+                  <li class="list-group-item"><span class = "bold">Appointment Time: </span><%= ele.appointmentTime%></li>
+
                 </ul>
+                <div class="card-body pb-2">
+                  <li class="list-group-item"><a class = "bold btn btn-primary" href="#">View Receipt</a></li>
+                </div>
                 
               </div>
     
