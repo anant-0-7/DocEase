@@ -28,6 +28,7 @@ const userSchema=new mongoose.Schema({
     age:Number,
     bloodGrp:String,
     starttime:String,
+    hospitalName:String,
     
     contact:{
         type:String,
