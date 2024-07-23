@@ -76,7 +76,6 @@ app.get("/patient", (req,res)=>{
 app.get("/doctor/:id", isAuthenticatedDoctor,wrapAsync(async (req, res)=>{
     var id = req.params.id;
     var doc = await User.findById(id);
-    console.log(doc);
     var patient;
     if(doc.ongoingPatient) patient = await User.findById(doc.ongoingPatient._id);
     else patient = false;
@@ -119,6 +118,22 @@ app.get("/doctor/done/:id", async (req, res)=>{
 
 
 
+app.get("/doctor/prev/:id", async(req, res)=>{
+    var id = req.params.id;
+    var doc =  await User.findById(id);
+    var arr = [];
+
+    for(const element of doc.finishedPatients){
+        var temp = await User.findById(element._id).exec();
+        temp.appointmentTime = element.appointmentTime;
+        temp.appointmentNo = element.appointmentNo;
+        arr.push(temp);
+    }
+    
+
+    console.log(arr);
+    res.render("doctor_other.ejs", {id:id, name:doc.name, prev: true, arr: arr})
+})
 
 
 

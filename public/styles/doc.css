@@ -1,0 +1,10 @@
+#container{
+    display: flex;
+    margin-top: 50px;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.bold{
+    font-weight: bold;
+}
