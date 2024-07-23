@@ -1,8 +1,9 @@
 <%- include("partials/boilerplate.ejs")%>
+<%- include("partials/home.ejs")%>
+<%-include("includes/flash.ejs")%>
 <link rel="stylesheet" href="/styles/login.css">
     <body class="d-flex align-items-center bg-body-tertiary">
 
-        <%- include("partials/home.ejs")%>
 
         <div class = "container login">
             <form action="/patient" method="POST" novalidate class="needs-validation">
