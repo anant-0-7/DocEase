@@ -36,16 +36,19 @@ const userSchema=new mongoose.Schema({
     },
     ongoingPatient: {
         _id: String,
+        appid:String,
         appointmentNo: Number,
         appointmentTime: String,
     },
     upcomingPatients:[{
         _id: String,
+        appid:String,
         appointmentNo:Number,
         appointmentTime: String,
     }],
     finishedPatients:[{
         _id: String,
+        appid:String,
         appointmentNo:Number,
         appointmentTime:String,
     }]

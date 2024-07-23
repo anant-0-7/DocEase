@@ -179,6 +179,15 @@ app.get("/patient/prev/:id", isAuthenticatedPatient,wrapAsync(async (req, res)=>
     
 }));
 
+app.get("/patient/:id1/view/:id2",isAuthenticatedPatient,wrapAsync(async (req, res)=>{
+    var id1 = req.params.id1;
+    var id2 = req.params.id2;
+    res.render("viewPage.ejs",{id1,id2});
+  
+    
+}));
+
+
 
 
 
