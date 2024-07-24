@@ -159,7 +159,12 @@ app.get("/doctor/upcoming/:id", isAuthenticatedDoctor,wrapAsync(async(req, res)=
 app.get("/patient/:id", isAuthenticatedPatient,wrapAsync(async (req, res)=>{
     var id = req.params.id;
     var patient = await User.findById(id);
-    var doctors=await User.find( { upcomingPatients: { $elemMatch: { _id:id}}});
+    var doctors = await User.find({
+        $or: [
+            { upcomingPatients: { $elemMatch: { _id: id } } },
+            { "ongoingPatient._id": id }
+        ]
+    });
     doctors.forEach(element=>{
         element.upcomingPatients=element.upcomingPatients.filter((ele)=>ele._id==id)
     })
@@ -167,6 +172,8 @@ app.get("/patient/:id", isAuthenticatedPatient,wrapAsync(async (req, res)=>{
     res.render("patient.ejs",{id:id,arr:doctors,prev:false,name:patient.name,patient});
     
 }));
+
+
 app.get("/patient/prev/:id", isAuthenticatedPatient,wrapAsync(async (req, res)=>{
     var id = req.params.id;
     var patient = await User.findById(id);
@@ -178,6 +185,7 @@ app.get("/patient/prev/:id", isAuthenticatedPatient,wrapAsync(async (req, res)=>
     res.render("patientpast.ejs",{id:id,arr:doctors,prev:true,name:patient.name,patient});
     
 }));
+
 
 app.get("/patient/:id1/view/:id2",isAuthenticatedPatient,wrapAsync(async (req, res)=>{
     var id1 = req.params.id1;

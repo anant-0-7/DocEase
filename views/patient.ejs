@@ -31,30 +31,61 @@
 
       <div id = "container">
 
-        <% if(arr.length){ arr.forEach(element => {%>
+        <% var x; var y; if(arr.length){ arr.forEach(element => {%>
         <div class = "card-container">
             <div class="card text-bg-light" style="width: 18rem;">
                 <div class="card-body">
-                  <h3 class="card-title bold"><%= element.name%></h3>
-                  <h4 class="card-title bold"><%= element.hospitalName%></h4>
-                  <h5 class="card-title bold"><%= element.contact%></h5>
+                  <h4 class="card-title bold"><%= element.name%></h3>
+                  <h5 class="card-title"><%= element.hospitalName%></h4>
+                  <h6 class="card-title"><%= element.contact%></h5>
                   
                 </div>
                 <ul class="list-group list-group-flush text-bg-light">
-                  <li class="list-group-item"><sp an class = "bold">Appointment No.: </span><%= element.finishedPatients[0].appointmentNo%></li>
-                  <li class="list-group-item"><span class = "bold">Appointment Time: </span><%= element.finishedPatients[0].appointmentTime%></li>
+                  <li class="list-group-item"><span class = "bold">Appointment No.: </span><% if (element.upcomingPatients.length) { %>
+                   
+                  <%= element.upcomingPatients[0].appointmentNo%> <% } else { %> <%= element.ongoingPatient.appointmentNo %></li> <% } %>
+                  <li class="list-group-item"><span class = "bold">Appointment Time: </span><% if (element.upcomingPatients.length) { %>
+                   
+                    <%= element.upcomingPatients[0].appointmentTime%> <% } else { %> <%= element.ongoingPatient.appointmentTime %> <%}%></li>
+                  
+                    
+                  <li class="list-group-item"><% 
+                      if(element.ongoingPatient._id !=id){
+                        y = element.upcomingPatients[0].appointmentNo;
+                        
+                        if(element.ongoingPatient) x = element.ongoingPatient.appointmentNo;
+                        else x =0;
+
+                      }
+
+                      else {
+                        y = 0;
+                        x=0;
+                      }
+                    
+                  
+                  %> 
+                      
+                
+                <% if ((y-x)!=0) { %>
+                  <span class = "bold">Expected Waiting Time: </span><%= (y-x)*15 + " min" %>
+                <% } else { %>
+                  <span class = "bold">It's your turn now</span>
+                 
+                  <% } %>
+                 
+                </li>
                 
                 </ul>
                 <div class = "card-body pb-0">
-                  <% if(prev) {%>
-                  <p class="list-group-item"><a class = "bold btn btn-primary" href="#">View Receipt</a></p>
-                  <% } else{ %>
-                    <% if(element.ongoingPatient) {%>
-                      <p class="list-group-item"><span class = "bold">Current AppointmentNo.: </span> <%=element.ongoingPatient.appointmentNo%></p>
+                  
+                  
+                    <% if(element.ongoingPatient._id) {%>
+                      <p class="list-group-item"><span class = "bold">Current Appointment: </span> <%=element.ongoingPatient.appointmentNo%></p>
                       <% } else { %>
                       
-                        <p class="list-group-item"><span class = "bold">Current AppointmentNo.: </span> 0</p>
-                    <% }} %>
+                        <p class="list-group-item"><span class = "bold">Current Appointment.: </span> 0</p>
+                    <% } %>
                 </div>
 
               </div>
@@ -63,7 +94,7 @@
 
         <% })} else { %>
 
-            <p class = "bold">Nothing to show here</p>
+            <p class = "bold">Book an appointment to see your appoinments here</p>
         
         <% } %>
 

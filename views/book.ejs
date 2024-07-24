@@ -30,7 +30,7 @@
 
       <div id = "container">
 
-        <% if(doc.length) { doc.forEach(element => { %>
+        <%var y; if(doc.length) { doc.forEach(element => { %>
             
         <div class="card text-bg-light mb-4" style="width: 18rem;">
             <div class="card-body">
@@ -42,15 +42,15 @@
                 <%= element.ongoingPatient.appointmentNo %> <% } else if(element.upcomingPatients.length!=0) { %>
                 <%= element.upcomingPatients[0].appointmentNo%> <% } else { %> 0 <%}%> </li>
 
-              <li class="list-group-item"><span class = "bold">You will get:</span> <% if(element.upcomingPatients.length) {%>
-                <%= element.upcomingPatients[element.upcomingPatients.length-1].appointmentNo+1 %> <% } else if(element.ongoingPatient._id) {%>
-                    <%= element.ongoingPatient.appointmentNo+1 %> <% } else { %> 1 <% } %>
+              <li class="list-group-item"><span class = "bold">You will get:</span> <% if(element.upcomingPatients.length) {  y = (element.upcomingPatients[element.upcomingPatients.length-1].appointmentNo+1) %>
+                <%= element.upcomingPatients[element.upcomingPatients.length-1].appointmentNo+1 %> <% } else if(element.ongoingPatient._id) {  y = (element.ongoingPatient.appointmentNo+1) %>
+                    <%= element.ongoingPatient.appointmentNo+1 %> <% } else {  y = 1 %> 1 <% } %>
             </li>
 
-              <li class="list-group-item">A third item</li>
+              <li class="list-group-item"><span class = "bold">Your time: </span><% var temp; if(y%3==0) temp = Math.floor(y/3)+1; else temp = Math.floor(y/3) %> <%= element.starttime + "+"+ temp*15 + " min" %> </li>
             </ul>
             <div class="card-body pb-2">
-              <a href="#" class="card-link btn btn-success">Book</a>
+              <a href="/patient/" class="card-link btn btn-success">Book</a>
             </div>
           </div>
          <% })} %> 
