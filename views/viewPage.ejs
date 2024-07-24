@@ -1,0 +1,136 @@
+<%- include("partials/boilerplate.ejs") %>
+<link rel = "stylesheet" href = "/styles/viewreciept.css">
+<body>
+<div id="invoiceholder">
+    <div id="invoice" class="effect2">
+        <div id="invoice-top">
+            <div class="logo">
+                <img
+                    src="https://www.creativefabrica.com/wp-content/uploads/2020/02/10/Eye-Logo-Graphics-1-21-580x386.jpg"
+                    alt="Logo"
+                />
+            </div>
+            <div class="title">
+                <h1>Invoice</h1>
+                <p>
+                    Appointment-Date:
+                    <span id="invoice_date"
+                        ><%= Date.now() %></span
+                    >
+                </p>
+                <p>
+                    Appointment-No:
+                    <span id="invoice_date"
+                        ><%= appointmentNo %></span
+                    >
+                </p>
+                <p>
+                    Appointment-Time:
+                    <span id="invoice_date"
+                        ><%= appointmentTime %></span
+                    >
+                </p>
+            </div>
+            <!--End Title-->
+        </div>
+        <!--End InvoiceTop-->
+
+        <div id="invoice-mid">
+            <div id="message">
+                <h2>Hello <%= patient.name %>,</h2>
+            </div>
+            
+            <div class="clearfix">
+                <div class="col-left">
+                    <div class="clientlogo">
+                        <img
+                            src="https://tse3.mm.bing.net/th?id=OIP.HHVUf3TYqncgpJXyCMmxyAHaHa&pid=Api&P=0&h=180"
+                            alt="Sup"
+                        />
+                    </div>
+                    <div class="clientinfo">
+                        <h2 id="supplier">HospitalName</h2>
+                        <p><%= doctor.hospitalName %></p>
+                        <h2 id="supplier">Doctor</h2>
+                        <p><%= doctor.name %></p>
+                    </div>
+                </div>
+                <div class="col-right">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span>Invoice Total</span
+                                    ><label id="invoice_total"
+                                        >500</label
+                                    >
+                                </td>
+                                <td>
+                                    <span>Currency</span
+                                    ><label id="currency">Rupees</label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--End Invoice Mid-->
+
+        <div id="invoice-bot">
+            <div id="table">
+                <table class="table-main">
+                    <thead>
+                        <tr class="tabletitle">
+                            <th>Title</th>
+                            <th>Price</th>
+                            <th>Tax</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tr class="list-item">
+                        
+                        <td data-label="Title" class="tableitem">
+                            FEE_PAYMENT
+                        </td>
+                        
+                        <td data-label="Price" class="tableitem">
+                            450
+                        </td>
+                        <td data-label="Tax" class="tableitem">
+                            50
+                        </td>
+                        <td data-label="Total" class="tableitem">
+                            500
+                        </td>
+                    </tr>
+                    <tr class="list-item total-row">
+                        <th colspan="9" class="tableitem">
+                            Grand Total-
+                        </th>
+                        <td data-label="Grand Total" class="tableitem">
+                            500
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!--End Table-->
+        </div>
+        <!--End InvoiceBot-->
+        <footer>
+            <div id="legalcopy" class="clearfix">
+                <p class="col-right">
+                    Our mailing address is:
+                    <span class="email"
+                        ><a href="mailto:<%=doctor.hospitalName%>800@gmail.com"
+                            ><%=doctor.hospitalName%>800@gmail.com</a>
+                            
+                    </span>
+                </p>
+            </div>
+        </footer>
+    </div>
+    <!--End Invoice-->
+</div>
+<!-- End Invoice Holder-->
+</body>

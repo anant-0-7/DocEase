@@ -182,21 +182,33 @@ app.get("/patient/prev/:id", isAuthenticatedPatient,wrapAsync(async (req, res)=>
 app.get("/patient/:id1/view/:id2",isAuthenticatedPatient,wrapAsync(async (req, res)=>{
     var id1 = req.params.id1;
     var id2 = req.params.id2;
-    res.render("viewPage.ejs",{id1,id2});
+    var doctor = await User.findById(id1);
+    var patientid;
+    var appointmentNo;
+    var appointmentTime;
+    doctor.finishedPatients.forEach(element=>{
+        if(element.appid==id2){
+            patientid=element._id;
+            appointmentNo=element.appointmentNo;
+            appointmentTime=element.appointmentTime;
+        }
+    })
+    var patient= await User.findById(patientid);
+    res.render("viewPage.ejs",{doctor,patient,appointmentNo,appointmentTime});
   
     
 }));
 
 
 
-app.get("/patient/book/:id", async(req, res)=>{
+app.get("/patient/book/:id", isAuthenticatedPatient,wrapAsync(async(req, res)=>{
 
     var id = req.params.id;
     var doctors = await User.find({usertype:"doctor"});
     var patient = await User.findById(id);
     res.render("book.ejs", {doc: doctors, id:id, name:patient.name});
 
-})
+}))
 
 
 
