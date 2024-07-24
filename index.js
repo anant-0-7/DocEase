@@ -192,9 +192,9 @@ app.get("/patient/:id1/view/:id2",isAuthenticatedPatient,wrapAsync(async (req, r
 app.get("/patient/book/:id", async(req, res)=>{
 
     var id = req.params.id;
-    var doctors = await User.find({usertype:doctors});
-
-
+    var doctors = await User.find({usertype:"doctor"});
+    var patient = await User.findById(id);
+    res.render("book.ejs", {doc: doctors, id:id, name:patient.name});
 
 })
 
