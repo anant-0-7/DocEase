@@ -158,16 +158,19 @@ app.get("/doctor/delete/:id1/patient/:id2",isAuthenticatedDoctor, wrapAsync(asyn
     var doc = await User.findById(docid);
     let arr = doc.upcomingPatients;
     let sind=0;
-    for(let i=0;i<arr.length;i++){
+    let l=arr.length;
+    let ind=0;
+    for(let i=0;i<l;i++){
         if(arr[i]._id==patientid){
-            arr.splice(i,1);
+            ind=i;
             sind++;
             break;
         }
         sind++;
     }
-    for(let i=sind;i<arr.length;i++){
+    for(let i=sind;i<l;i++){
         arr[i].appointmentNo=arr[i].appointmentNo-1;
+        
         if(Math.floor(arr[i].appointmentNo/4)==0){
             arr[i].appointmentTime=doc.starttime;
         }
@@ -175,6 +178,8 @@ app.get("/doctor/delete/:id1/patient/:id2",isAuthenticatedDoctor, wrapAsync(asyn
             arr[i].appointmentTime=doc.starttime+"+"+Math.floor(arr[i].appointmentNo/4)*5+"min";
         }
     }
+    arr.splice(ind,1);
+    
     let update = await User.updateOne({_id: docid}, {upcomingPatients: arr});
     res.redirect(`/doctor/upcoming/${docid}`);
 }));
