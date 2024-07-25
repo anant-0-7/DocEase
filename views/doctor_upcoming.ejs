@@ -1,0 +1,67 @@
+<%- include("partials/boilerplate.ejs") %>
+<link rel = "stylesheet" href = "/styles/doc.css">
+<body>
+    
+    <div class="container">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+          <div class="col-md-3 mb-2 mb-md-0">
+            <a href="/doctor/<%=id%>" class="d-inline-flex link-body-emphasis text-decoration-none">
+              <span class="fs-5">Hi, <%=name%>-<%=hospitalName %></span>
+            </a>
+          </div>
+    
+          <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="/doctor/<%=id%>" class="nav-link px-2">Ongoing</a></li>
+            <li> <% if(prev) {%><a href="/doctor/prev/<%=id%>" class="nav-link px-2  link-secondary">Previous</a></li>
+            <li><a href="/doctor/upcoming/<%=id%>" class="nav-link px-2">Upcoming</a></li>
+            <% } else { %>
+                <a href="/doctor/prev/<%=id%>" class="nav-link px-2">Previous</a></li>
+                <li><a href="/doctor/upcoming/<%=id%>" class="nav-link px-2 link-secondary">Upcoming</a></li>
+            <% } %>
+          </ul>
+    
+          <div class="col-md-3 text-end">
+            <button type="button" class="btn btn-primary"><a class="nav-link" href="/logout"><b>LogOut</b></a></button>
+          </div>
+        </header>
+      </div>
+
+
+      <div id = "container">
+
+        <% if(arr.length){ arr.forEach(element => {%>
+        <div class = "card-container">
+            <div class="card text-bg-light" style="width: 18rem;">
+                <div class="card-body">
+                  <h3 class="card-title bold"><%= element.name%></h3>
+                  <p class="card-text"><span class = "bold">Appointment No.: </span><%= element.appointmentNo%></p>
+                  <p class="card-text"><span class = "bold">Appointment Time: </span><%= element.appointmentTime%></p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><span class = "bold">Age: </span> <%=element.age%></li>
+                  <li class="list-group-item"><span class = "bold">Blood Group: </span> <%=element.bloodGrp%></li>
+                  <li class="list-group-item"><span class = "bold">Contact No: </span> <%=element.contact%></li>
+                </ul>
+                <div class="card-body" style="display: flex; justify-content: space-between; margin: 0 0.5rem;">
+                    <form method = "GET" action = "/doctor/delete/<%=id%>/patient/<%=element._id%>">
+                      <input type = "submit" class="card-link btn btn-danger" value = "Delete">
+                    </form>
+                    <form method = "GET" action = "/doctor/update/<%=id%>/patient/<%=element._id%>">
+                        <input type = "submit" class="card-link btn btn-primary" value = "Move-2-Ahead">
+                      </form>
+                  </div>
+                
+              </div>
+    
+        </div>
+
+        <% })} else { %>
+
+            <p class = "bold">Nothing to show here</p>
+        
+        <% } %>
+
+
+      </div>
+
+</body>

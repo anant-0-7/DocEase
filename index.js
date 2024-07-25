@@ -88,7 +88,7 @@ app.get("/doctor/:id", isAuthenticatedDoctor,wrapAsync(async (req, res)=>{
 }));
 
 
-app.get("/doctor/done/:id", wrapAsync(async (req, res)=>{
+app.get("/doctor/done/:id",isAuthenticatedDoctor, wrapAsync(async (req, res)=>{
     var id = req.params.id;
     var doc = await User.findById(id);
     let arr = doc.upcomingPatients;
@@ -99,18 +99,17 @@ app.get("/doctor/done/:id", wrapAsync(async (req, res)=>{
     }
 
     let update = await User.updateOne({_id: id}, {upcomingPatients: arr});
-    console.log(update.acknowledged); // Boolean indicating everything went smoothly.
 
     if(doc.ongoingPatient){
         let prevArr = doc.finishedPatients;
         prevArr.push(doc.ongoingPatient);
         let update2 = await User.updateOne({_id: id}, {finishedPatients: prevArr});
-        console.log(update2.acknowledged);
+        
 
     }
 
     let update3 = await User.updateOne({_id: id}, {ongoingPatient: nextPatient});
-    console.log(update3.acknowledged);
+
     
 
     
@@ -134,9 +133,6 @@ app.get("/doctor/prev/:id",isAuthenticatedDoctor, wrapAsync(async(req, res)=>{
         temp.appointmentNo = element.appointmentNo;
         arr.push(temp);
     }
-    
-
-    console.log(arr);
     res.render("doctor_other.ejs", {id:id, name:doc.name,hospitalName:doc.hospitalName, prev: true, arr: arr})
 }));
 
@@ -152,9 +148,87 @@ app.get("/doctor/upcoming/:id", isAuthenticatedDoctor,wrapAsync(async(req, res)=
         arr.push(temp);
     }
 
-    console.log(arr);
-    res.render("doctor_other.ejs", {id:id, name:doc.name,hospitalName:doc.hospitalName, prev: false, arr: arr})
+
+    res.render("doctor_upcoming.ejs", {id:id, name:doc.name,hospitalName:doc.hospitalName, prev: false, arr: arr})
 }))
+
+app.get("/doctor/delete/:id1/patient/:id2",isAuthenticatedDoctor, wrapAsync(async (req, res)=>{
+    var docid = req.params.id1;
+    var patientid=req.params.id2;
+    var doc = await User.findById(docid);
+    let arr = doc.upcomingPatients;
+    let sind=0;
+    for(let i=0;i<arr.length;i++){
+        if(arr[i]._id==patientid){
+            arr.splice(i,1);
+            sind++;
+            break;
+        }
+        sind++;
+    }
+    for(let i=sind;i<arr.length;i++){
+        arr[i].appointmentNo=arr[i].appointmentNo-1;
+        if(Math.floor(arr[i].appointmentNo/4)==0){
+            arr[i].appointmentTime=doc.starttime;
+        }
+        else{
+            arr[i].appointmentTime=doc.starttime+"+"+Math.floor(arr[i].appointmentNo/4)*5+"min";
+        }
+    }
+    let update = await User.updateOne({_id: docid}, {upcomingPatients: arr});
+    res.redirect(`/doctor/upcoming/${docid}`);
+}));
+
+
+app.get("/doctor/update/:id1/patient/:id2",isAuthenticatedDoctor,wrapAsync(async (req, res)=>{
+    var docid = req.params.id1;
+    var patientid=req.params.id2;
+    var doc = await User.findById(docid);
+    let arr = doc.upcomingPatients;
+    
+    let sind=0;
+    
+    for(let i=0;i<arr.length;i++){
+        if(arr[i]._id==patientid && arr.length-sind>=3){
+            arr[i].appointmentNo=arr[i].appointmentNo+2;
+            if(Math.floor(arr[i].appointmentNo/4)==0){
+                arr[i].appointmentTime=doc.starttime;
+            }
+            else{
+                arr[i].appointmentTime=doc.starttime+"+"+Math.floor(arr[i].appointmentNo/4)*5+"min";
+            }
+            sind++;
+            break;
+        }
+        sind++;
+    }
+    if(arr.length-sind>=2){
+        for(let i=sind;i<sind+2;i++){
+        
+            console.log(arr[i]);
+            arr[i].appointmentNo=(arr[i].appointmentNo)-1;
+            
+            if(Math.floor((arr[i].appointmentNo)/4)==0){
+                arr[i].appointmentTime=doc.starttime;
+            }
+            else{
+                arr[i].appointmentTime=doc.starttime+Math.floor((arr[i].appointmentNo)/4)+"min";
+            }
+        
+        }
+        arr.sort(function(a, b) {
+        
+            var keyA = a.appointmentNo,
+                keyB = b.appointmentNo;
+                console.log(arr[0]);
+            if (keyA < keyB) return -1;
+            if (keyA > keyB) return 1;
+            return 0;
+        });
+    }
+    let update = await User.updateOne({_id: docid}, {upcomingPatients: arr});
+    res.redirect(`/doctor/upcoming/${docid}`);
+}));
 
 app.get("/patient/:id", isAuthenticatedPatient,wrapAsync(async (req, res)=>{
     var id = req.params.id;
@@ -168,7 +242,7 @@ app.get("/patient/:id", isAuthenticatedPatient,wrapAsync(async (req, res)=>{
     doctors.forEach(element=>{
         element.upcomingPatients=element.upcomingPatients.filter((ele)=>ele._id==id)
     })
-    console.log(doctors)
+
     res.render("patient.ejs",{id:id,arr:doctors,prev:false,name:patient.name,patient});
     
 }));
@@ -181,7 +255,7 @@ app.get("/patient/prev/:id", isAuthenticatedPatient,wrapAsync(async (req, res)=>
     doctors.forEach(element=>{
         element.finishedPatients=element.finishedPatients.filter((ele)=>ele._id==id)
     })
-    console.log(doctors)
+
     res.render("patientpast.ejs",{id:id,arr:doctors,prev:true,name:patient.name,patient});
     
 }));
