@@ -39,18 +39,21 @@ const userSchema=new mongoose.Schema({
         appid:String,
         appointmentNo: Number,
         appointmentTime: String,
+        appointmentDate: String
     },
     upcomingPatients:[{
         _id: String,
         appid:String,
         appointmentNo:Number,
         appointmentTime: String,
+        appointmentDate: String
     }],
     finishedPatients:[{
         _id: String,
         appid:String,
         appointmentNo:Number,
         appointmentTime:String,
+        appointmentDate: String
     }]
 
 });

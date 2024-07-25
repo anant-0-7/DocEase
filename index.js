@@ -8,6 +8,7 @@ const path=require("path");
 const {initializePassport,isAuthenticatedDoctor,isAuthenticatedPatient}=require("./passportConfig.js");
 const wrapAsync=require("./utils/wrapAsync.js");
 const ExpressError=require("./utils/ExpressError.js");
+const { v4: uuidv4 } = require('uuid');
 
 
 const port = 3000;
@@ -300,7 +301,68 @@ app.get("/patient/book/:id", isAuthenticatedPatient,wrapAsync(async(req, res)=>{
 app.get("/patient/:id1/book/:id2", isAuthenticatedPatient, wrapAsync(async(req, res)=>{
         var id1 = req.params.id1;
         var id2 = req.params.id2;
+        var doc = await User.findById(id2);
         
+        var isBooked = false;
+        console.log(doc);
+        if(doc.ongoingPatient._id == id1) isBooked = true;
+
+        var arr = doc.upcomingPatients;
+        arr.forEach(element=>{
+            if(element._id ==id1){
+                isBooked = true;
+            }
+        })
+
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+
+        var num;
+
+        if(arr.length){
+            num = arr[arr.length-1].appointmentNo+1;
+        }
+        else if(doc.ongoingPatient._id) num = doc.ongoingPatient.appointmentNo+1;
+        
+        else num = 1;
+
+        var time;
+        if(num%3==0) time = (Math.floor(num/3)-1)*15;
+        else time = (Math.floor(num/3))*15;
+
+        const newPatient = {
+            _id: id1,
+            appid: uuidv4(),
+            appointmentDate: today,
+            appointmentNo: num,
+            appointmentTime: doc.starttime +"+"+ time + " min"
+
+        }
+
+        if(arr.length || doc.ongoingPatient._id){
+            arr.push(newPatient);
+            let tmp = await User.updateOne({_id:id2}, {upcomingPatients:arr});
+        }
+        else{
+            let tmp = await User.updateOne({_id: id2}, {ongoingPatients: newPatient});
+        }
+
+        if(isBooked) res.send("Cannot book");
+        else {
+            if(arr.length || doc.ongoingPatient._id){
+                arr.push(newPatient);
+                let tmp = await User.updateOne({_id:id2}, {upcomingPatients:arr});
+            }
+            else{
+                let tmp = await User.updateOne({_id: id2}, {ongoingPatient: newPatient});
+            }
+            res.send("Booked successfully");
+        }
+
 
 }))
 
@@ -316,13 +378,6 @@ app.get("/logout",(req,res,next)=>{
     })
 })
 
-app.all("*",(req,res,next)=>{
-    next(new ExpressError(404,"Page not Found!"));
-});
-app.use((err,req,res,next)=>{
-    let {status=500,message="Something went Wrong"}=err;
-    res.status(status).render("error.ejs",{err});
-})
 
 app.listen(port, () => {
   console.log(`App is running on PORT ${port}`);
