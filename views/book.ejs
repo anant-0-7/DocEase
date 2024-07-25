@@ -50,7 +50,7 @@
               <li class="list-group-item"><span class = "bold">Your time: </span><% var temp; if(y%3==0) temp = Math.floor(y/3)+1; else temp = Math.floor(y/3) %> <%= element.starttime + "+"+ temp*15 + " min" %> </li>
             </ul>
             <div class="card-body pb-2">
-              <a href="/patient/" class="card-link btn btn-success">Book</a>
+              <a href="/patient/<%=id%>/book/<%=element._id%>" class="card-link btn btn-success">Book</a>
             </div>
           </div>
          <% })} %> 

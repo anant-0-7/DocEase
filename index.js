@@ -218,6 +218,13 @@ app.get("/patient/book/:id", isAuthenticatedPatient,wrapAsync(async(req, res)=>{
 
 }))
 
+app.get("/patient/:id1/book/:id2", isAuthenticatedPatient, wrapAsync(async(req, res)=>{
+        var id1 = req.params.id1;
+        var id2 = req.params.id2;
+        
+
+}))
+
 
 
 app.get("/logout",(req,res,next)=>{
