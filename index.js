@@ -55,7 +55,7 @@ app.get("/", (req,res)=>{
 })
 
 app.post("/doctor",passport.authenticate("local",{failureRedirect:"/doctor",failureFlash:true}),wrapAsync(async(req,res)=>{
-    req.flash("success","Welcome to BookaDR,You are Logged in.");
+    req.flash("success","Welcome to DocEase,You are Logged in.");
     let userid=req.user._id;
     let redirectUrl=`/doctor/${userid}`
     res.redirect(redirectUrl);
@@ -66,7 +66,7 @@ app.get("/doctor", (req,res)=>{
 })
 
 app.post("/patient",passport.authenticate("local",{failureRedirect:"/patient",failureFlash:true}),wrapAsync(async(req,res)=>{
-    req.flash("success","Welcome to BookaDR,You are Logged in.");
+    req.flash("success","Welcome to DocEase,You are Logged in.");
     let userid=req.user._id;
 
     let redirectUrl=`/patient/${userid}`
@@ -274,15 +274,17 @@ app.get("/patient/:id1/view/:id2",isAuthenticatedPatient,wrapAsync(async (req, r
     var patientid;
     var appointmentNo;
     var appointmentTime;
+    var appointmentDate;
     doctor.finishedPatients.forEach(element=>{
         if(element.appid==id2){
             patientid=element._id;
             appointmentNo=element.appointmentNo;
             appointmentTime=element.appointmentTime;
+            appointmentDate=element.appointmentDate;
         }
     })
     var patient= await User.findById(patientid);
-    res.render("viewPage.ejs",{doctor,patient,appointmentNo,appointmentTime});
+    res.render("viewPage.ejs",{doctor,patient,appointmentNo,appointmentTime,appointmentDate});
   
     
 }));
@@ -351,7 +353,9 @@ app.get("/patient/:id1/book/:id2", isAuthenticatedPatient, wrapAsync(async(req, 
             let tmp = await User.updateOne({_id: id2}, {ongoingPatients: newPatient});
         }
 
-        if(isBooked) res.send("Cannot book");
+        if(isBooked) {
+            req.flash("error","Appointment Already Booked");
+            res.redirect(`/patient/${id1}`);}
         else {
             if(arr.length || doc.ongoingPatient._id){
                 arr.push(newPatient);
@@ -360,7 +364,8 @@ app.get("/patient/:id1/book/:id2", isAuthenticatedPatient, wrapAsync(async(req, 
             else{
                 let tmp = await User.updateOne({_id: id2}, {ongoingPatient: newPatient});
             }
-            res.send("Booked successfully");
+            req.flash("success","Booked Successfully");
+            res.redirect(`/patient/${id1}`);
         }
 
 
