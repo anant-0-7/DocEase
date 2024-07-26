@@ -345,14 +345,7 @@ app.get("/patient/:id1/book/:id2", isAuthenticatedPatient, wrapAsync(async(req, 
 
         }
 
-        if(arr.length || doc.ongoingPatient._id){
-            arr.push(newPatient);
-            let tmp = await User.updateOne({_id:id2}, {upcomingPatients:arr});
-        }
-        else{
-            let tmp = await User.updateOne({_id: id2}, {ongoingPatients: newPatient});
-        }
-
+       
         if(isBooked) {
             req.flash("error","Appointment Already Booked");
             res.redirect(`/patient/${id1}`);}
