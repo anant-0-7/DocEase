@@ -1,4 +1,4 @@
-# Patient Appointment Booking and Management System
+# DocEase
 
 ## Overview
 This project is a web-based application designed to facilitate the appointment booking process for patients and streamline appointment management for doctors. Patients can book appointments and view real-time status updates, including expected wait times. Doctors can manage appointments by viewing current schedules, moving appointments, and updating statuses.
@@ -52,6 +52,21 @@ This project is a web-based application designed to facilitate the appointment b
    ```
 
 ## Usage
+### Test Users
+- **Patients:**
+  - **Username:** `patient1`
+    - Password: `password123`
+  - **Username:** `patient2`
+    - Password: `password789`
+  - **Username:** `patient3`
+
+- **Doctors:**
+  - **Username:** `doctor1`
+    - Password: `password456`
+  - **Username:** `doctor2`
+    - Password: `hashedpassword321`
+  - **Username:** `doctor3`
+
 
 ### For Patients
 1. **Register/Login**: Create an account or log in.
