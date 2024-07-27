@@ -40,13 +40,15 @@ This project is a web-based application designed to facilitate the appointment b
    npm install
    ```
 
+4. **Add SampleData.json to your MongoDB Database**
 
-4. **Start the application:**
+
+5. **Start the application:**
    ```sh
    node index.js
    ```
 
-5. **Open the application in your browser:**
+6. **Open the application in your browser:**
    ```
    http://localhost:3000
    ```
