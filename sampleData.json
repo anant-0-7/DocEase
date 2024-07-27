@@ -1,0 +1,504 @@
+[{
+  "_id": {
+    "$oid": "669ec0a12ca1721683f90dc7"
+  },
+  "username": "patient1",
+  "password": "password123",
+  "name": "John Doe",
+  "usertype": "patient",
+  "age": 30,
+  "bloodGrp": "O+",
+  "contact": "123-456-7890"
+},
+{
+  "_id": {
+    "$oid": "669ec2612ca1721683f90dc9"
+  },
+  "username": "patient2",
+  "password": "password789",
+  "name": "Alice Johnson",
+  "usertype": "patient",
+  "age": 25,
+  "bloodGrp": "AB-",
+  "contact": "555-123-4567"
+},
+{
+  "_id": {
+    "$oid": "669ec2c72ca1721683f90dca"
+  },
+  "username": "patient3",
+  "password": "password321",
+  "name": "Emily Green",
+  "usertype": "patient",
+  "age": 40,
+  "bloodGrp": "B+",
+  "contact": "999-888-7777"
+},
+{
+  "_id": {
+    "$oid": "669ec3952ca1721683f90dcc"
+  },
+  "username": "patient5",
+  "password": "hashedpassword789",
+  "name": "Sophie Miller",
+  "usertype": "patient",
+  "age": 28,
+  "bloodGrp": "AB-",
+  "contact": "444-333-2222"
+},
+{
+  "_id": {
+    "$oid": "669ec3a02ca1721683f90dcd"
+  },
+  "username": "patient6",
+  "password": "hashedpasswordabc",
+  "name": "Oliver Davis",
+  "usertype": "patient",
+  "age": 45,
+  "bloodGrp": "O-",
+  "contact": "111-222-3333"
+},
+{
+  "_id": {
+    "$oid": "669ec3d92ca1721683f90dce"
+  },
+  "username": "patient7",
+  "password": "hashedpassworddef",
+  "name": "Isabella Wilson",
+  "usertype": "patient",
+  "age": 32,
+  "bloodGrp": "B-",
+  "contact": "999-555-7777"
+},
+{
+  "_id": {
+    "$oid": "669ec3f12ca1721683f90dcf"
+  },
+  "username": "patient8",
+  "password": "hashedpasswordghi",
+  "name": "Jacob Taylor",
+  "usertype": "patient",
+  "age": 50,
+  "bloodGrp": "A+",
+  "contact": "888-777-6666"
+},
+{
+  "_id": {
+    "$oid": "669ec42c2ca1721683f90dd0"
+  },
+  "username": "patient9",
+  "password": "hashedpasswordjkl",
+  "name": "Ella Martinez",
+  "usertype": "patient",
+  "age": 26,
+  "bloodGrp": "AB+",
+  "contact": "333-444-5555"
+},
+{
+  "_id": {
+    "$oid": "669ec4432ca1721683f90dd1"
+  },
+  "username": "patient10",
+  "password": "hashedpasswordmno",
+  "name": "James Garcia",
+  "usertype": "patient",
+  "age": 38,
+  "bloodGrp": "O+",
+  "contact": "222-333-4444"
+},
+{
+  "_id": {
+    "$oid": "669ec5552ca1721683f90dd6"
+  },
+  "username": "doctor6",
+  "password": "hashedpassworddef",
+  "name": "Dr. Ethan Martinez",
+  "usertype": "doctor",
+  "contact": "555-555-6666",
+  "ongoingPatient": {
+    "_id": "669ec2c72ca1721683f90dca",
+    "appid": "42807d2d-6474-46a1-9d4e-7e7deb022974",
+    "appointmentDate": "09/30/2024",
+    "appointmentNo": 1,
+    "appointmentTime": "7pm+0 min"
+  },
+  "upcomingPatients": [
+    {
+      "_id": "669ec3952ca1721683f90dcc",
+      "appid": "a69f705d-e574-4cad-89ea-564ce9ceb6e4",
+      "appointmentNo": 2,
+      "appointmentTime": "7pm+0 min",
+      "appointmentDate": "09/30/2024"
+    },
+    {
+      "_id": "669ec3a02ca1721683f90dcd",
+      "appid": "679185ea-34f3-438c-af80-48fb8fa25d89",
+      "appointmentNo": 3,
+      "appointmentTime": "7pm+0 min",
+      "appointmentDate": "09/30/2024"
+    }
+  ],
+  "finishedPatients": [
+    {
+      "_id": "669ec2612ca1721683f90dc9",
+      "appid": "b5094c5b-7ee4-49f8-b592-78089b71cfa5",
+      "appointmentNo": 1,
+      "appointmentTime": "7pm+0 min",
+      "appointmentDate": "07/26/2024"
+    },
+    {
+      "_id": "669ec3952ca1721683f90dcc",
+      "appid": "421d8558-e78c-48ae-8575-60649b92f18e",
+      "appointmentNo": 2,
+      "appointmentTime": "7pm",
+      "appointmentDate": "07/26/2024"
+    },
+    {
+      "_id": "669ec3f12ca1721683f90dcf",
+      "appid": "d50f2883-514e-47c0-96f6-9ff53b7d6be4",
+      "appointmentNo": 3,
+      "appointmentTime": "7pm",
+      "appointmentDate": "07/26/2024"
+    },
+    {
+      "_id": "669ec2c72ca1721683f90dca",
+      "appid": "0e876832-2cc2-43f3-8ea2-9abced45bb02",
+      "appointmentNo": 4,
+      "appointmentTime": "7pm1min",
+      "appointmentDate": "07/26/2024"
+    },
+    {
+      "_id": "669ec42c2ca1721683f90dd0",
+      "appid": "08f35329-a6b6-4daf-8820-f4c9cc2988c7",
+      "appointmentNo": 5,
+      "appointmentTime": "7pm+5min",
+      "appointmentDate": "07/26/2024"
+    }
+  ],
+  "hospitalName": "Sirohi Homeopathy Clinic",
+  "starttime": "7pm"
+},
+{
+  "_id": {
+    "$oid": "669ec9902ca1721683f90ddb"
+  },
+  "username": "patient4",
+  "password": "hashedpassword456",
+  "name": "Daniel Brown",
+  "usertype": "patient",
+  "age": 35,
+  "bloodGrp": "A+",
+  "contact": "777-666-5555"
+},
+{
+  "_id": {
+    "$oid": "66a3bb8adad60e7fe7a5dcc0"
+  },
+  "username": "doctor1",
+  "password": "password456",
+  "name": "Dr. Jane Smith",
+  "usertype": "doctor",
+  "startime": "8pm",
+  "contact": "987-654-3210",
+  "ongoingPatient": {
+    "_id": "669ec3a02ca1721683f90dcd",
+    "appid": "f75c31b1-24d5-41e2-9395-49da46755578",
+    "appointmentDate": "09/30/2024",
+    "appointmentNo": 1,
+    "appointmentTime": "6:30pm+0 min"
+  },
+  "upcomingPatients": [
+    {
+      "_id": "669ec3d92ca1721683f90dce",
+      "appid": "dcd7c575-402f-445f-b745-785f8edc24b2",
+      "appointmentNo": 2,
+      "appointmentTime": "6:30pm+0 min",
+      "appointmentDate": "09/30/2024"
+    }
+  ],
+  "finishedPatients": [
+    {
+      "_id": "669ec2c72ca1721683f90dca",
+      "appid": "e6c7d1eb-6895-4da6-9e4a-6a7a1be98b15",
+      "appointmentNo": 1,
+      "appointmentTime": "6:30pm+0 min",
+      "appointmentDate": "07/26/2024"
+    },
+    {
+      "_id": "669ec3952ca1721683f90dcc",
+      "appid": "70b9c70f-75e6-4c5b-9ab9-a71a2b3f8bc2",
+      "appointmentNo": 2,
+      "appointmentTime": "6:30pm+0 min",
+      "appointmentDate": "07/26/2024"
+    },
+    {
+      "_id": "669ec3d92ca1721683f90dce",
+      "appid": "af66c830-eb41-4c62-8439-1319fdcf1236",
+      "appointmentNo": 3,
+      "appointmentTime": "6:30pm+0 min",
+      "appointmentDate": "07/26/2024"
+    }
+  ],
+  "hospitalName": "Max Hospital",
+  "starttime": "6:30pm"
+},
+{
+  "_id": {
+    "$oid": "66a3bbbbdad60e7fe7a5dcc2"
+  },
+  "username": "doctor2",
+  "password": "hashedpassword321",
+  "name": "Dr. David Johnson",
+  "usertype": "doctor",
+  "contact": "999-111-2222",
+  "ongoingPatient": {
+    "_id": "669ec2c72ca1721683f90dca",
+    "appid": "92ba0c69-cb0b-43e8-a44f-4b2a8f8bc505",
+    "appointmentDate": "09/30/2024",
+    "appointmentNo": 1,
+    "appointmentTime": "8.30pm+0 min"
+  },
+  "upcomingPatients": [
+    {
+      "_id": "669ec3f12ca1721683f90dcf",
+      "appid": "5ff4a769-5f1a-4229-bead-c995ce4e7b38",
+      "appointmentNo": 2,
+      "appointmentTime": "8.30pm+0 min",
+      "appointmentDate": "09/30/2024"
+    }
+  ],
+  "finishedPatients": [
+    {
+      "_id": "669ec0a12ca1721683f90dc7",
+      "appid": "4f5e98f9-c93d-4aba-81f8-39e3a0f8e670",
+      "appointmentNo": 1,
+      "appointmentTime": "8.30pm+0 min",
+      "appointmentDate": "07/26/2024"
+    },
+    {
+      "_id": "669ec3a02ca1721683f90dcd",
+      "appid": "ca48ba29-bb54-4590-81c3-72896c6f6a00",
+      "appointmentNo": 2,
+      "appointmentTime": "8.30pm",
+      "appointmentDate": "07/26/2024"
+    },
+    {
+      "_id": "669ec2612ca1721683f90dc9",
+      "appid": "774ae963-00e2-485a-8e54-44cf700a5b6a",
+      "appointmentNo": 3,
+      "appointmentTime": "8.30pm",
+      "appointmentDate": "07/26/2024"
+    },
+    {
+      "_id": "669ec4432ca1721683f90dd1",
+      "appid": "9fb3fb69-9606-4075-919b-f172c657b566",
+      "appointmentNo": 4,
+      "appointmentTime": "8.30pm1min",
+      "appointmentDate": "07/26/2024"
+    },
+    {
+      "_id": "669ec3d92ca1721683f90dce",
+      "appid": "60581c29-3076-4dc2-8afb-e1980d981598",
+      "appointmentNo": 5,
+      "appointmentTime": "8.30pm+5min",
+      "appointmentDate": "07/26/2024"
+    }
+  ],
+  "starttime": "8.30pm",
+  "hospitalName": "Yashoda Hospital"
+},
+{
+  "_id": {
+    "$oid": "66a3bbeddad60e7fe7a5dcc4"
+  },
+  "username": "doctor3",
+  "password": "hashedpassword456",
+  "name": "Dr. Sarah Williams",
+  "usertype": "doctor",
+  "starttime": "7pm",
+  "contact": "888-222-3333",
+  "ongoingPatient": {
+    "_id": "669ec2612ca1721683f90dc9",
+    "appid": "a4952a75-29c1-4957-a240-44945b068746",
+    "appointmentDate": "09/30/2024",
+    "appointmentNo": 1,
+    "appointmentTime": "7pm+0 min"
+  },
+  "upcomingPatients": [
+    {
+      "_id": "669ec2c72ca1721683f90dca",
+      "appid": "ac09ad40-ef48-4b9e-abad-7f459d0952a7",
+      "appointmentNo": 2,
+      "appointmentTime": "7pm+0 min",
+      "appointmentDate": "09/30/2024"
+    },
+    {
+      "_id": "669ec3952ca1721683f90dcc",
+      "appid": "ed972c08-759e-43be-968e-144ec1a428c5",
+      "appointmentNo": 3,
+      "appointmentTime": "7pm+0 min",
+      "appointmentDate": "09/30/2024"
+    },
+    {
+      "_id": "669ec3d92ca1721683f90dce",
+      "appid": "44b554e4-43c4-43fa-b711-c4144ae983f8",
+      "appointmentNo": 4,
+      "appointmentTime": "7pm+15 min",
+      "appointmentDate": "09/30/2024"
+    },
+    {
+      "_id": "669ec3f12ca1721683f90dcf",
+      "appid": "0edbf580-ab9c-4b1f-ab25-e4b90ada3aa2",
+      "appointmentNo": 5,
+      "appointmentTime": "7pm+15 min",
+      "appointmentDate": "09/30/2024"
+    }
+  ],
+  "finishedPatients": [
+    {
+      "_id": "669ec2c72ca1721683f90dca",
+      "appid": "e6aca57e-678c-41b6-83f8-22d37b69493b",
+      "appointmentNo": 1,
+      "appointmentTime": "7pm+0 min",
+      "appointmentDate": "07/26/2024"
+    },
+    {
+      "_id": "669ec42c2ca1721683f90dd0",
+      "appid": "cfa2c05d-d7b6-46b3-87ca-b7b694a287b8",
+      "appointmentNo": 2,
+      "appointmentTime": "7pm",
+      "appointmentDate": "07/26/2024"
+    },
+    {
+      "_id": "669ec4432ca1721683f90dd1",
+      "appid": "b0ab7312-e700-4e3d-acec-b13939b0aad3",
+      "appointmentNo": 3,
+      "appointmentTime": "7pm",
+      "appointmentDate": "07/26/2024"
+    },
+    {
+      "_id": "669ec3a02ca1721683f90dcd",
+      "appid": "448ebc3a-dbad-4cef-a9d8-6f75fe366148",
+      "appointmentNo": 4,
+      "appointmentTime": "7pm+5min",
+      "appointmentDate": "07/26/2024"
+    }
+  ],
+  "hospitalName": "Anchal Health Care"
+},
+{
+  "_id": {
+    "$oid": "66a3bc46dad60e7fe7a5dcc6"
+  },
+  "username": "doctor5",
+  "password": "hashedpasswordabc",
+  "name": "Dr. Olivia Taylor",
+  "usertype": "doctor",
+  "contact": "666-444-5555",
+  "ongoingPatient": {
+    "_id": "669ec3952ca1721683f90dcc",
+    "appid": "ceae83a3-dbca-4a61-ba01-65a27a580521",
+    "appointmentDate": "09/30/2024",
+    "appointmentNo": 1,
+    "appointmentTime": "5pm+0 min"
+  },
+  "upcomingPatients": [
+    {
+      "_id": "669ec3a02ca1721683f90dcd",
+      "appid": "aff81c58-0ece-42b1-8b5b-4e695d43b7a6",
+      "appointmentNo": 2,
+      "appointmentTime": "5pm+0 min",
+      "appointmentDate": "09/30/2024"
+    },
+    {
+      "_id": "669ec3d92ca1721683f90dce",
+      "appid": "0b31fe38-6e52-4662-b1bc-96302e91e305",
+      "appointmentNo": 3,
+      "appointmentTime": "5pm+0 min",
+      "appointmentDate": "09/30/2024"
+    }
+  ],
+  "finishedPatients": [
+    {
+      "_id": "669ec0a12ca1721683f90dc7",
+      "appid": "9d2cce9d-0d3c-4506-af7c-23367dd2e3a3",
+      "appointmentNo": 1,
+      "appointmentTime": "5pm+0 min",
+      "appointmentDate": "07/26/2024"
+    },
+    {
+      "_id": "669ec3f12ca1721683f90dcf",
+      "appid": "c3e4391f-866c-4235-878c-749a2589bafe",
+      "appointmentNo": 2,
+      "appointmentTime": "5pm+0 min",
+      "appointmentDate": "07/26/2024"
+    },
+    {
+      "_id": "669ec4432ca1721683f90dd1",
+      "appid": "72d0aaba-d567-445d-bc86-5c4a0b0fb09e",
+      "appointmentNo": 3,
+      "appointmentTime": "5pm+0 min",
+      "appointmentDate": "07/26/2024"
+    }
+  ],
+  "hospitalName": "Chandra Laxmi Hospital",
+  "starttime": "5pm"
+},
+{
+  "_id": {
+    "$oid": "66a3bc71dad60e7fe7a5dcc8"
+  },
+  "username": "doctor4",
+  "password": "hashedpassword789",
+  "name": "Dr. Michael Brown",
+  "usertype": "doctor",
+  "starttime": "8pm",
+  "contact": "777-333-4444",
+  "ongoingPatient": {
+    "_id": "669ec0a12ca1721683f90dc7",
+    "appid": "023ea8c3-1419-4680-a080-4106fdc744e1",
+    "appointmentDate": "09/30/2024",
+    "appointmentNo": 1,
+    "appointmentTime": "8pm+0 min"
+  },
+  "upcomingPatients": [
+    {
+      "_id": "669ec2612ca1721683f90dc9",
+      "appid": "1ad0c5b7-7f52-4aa2-b4a9-2b5175d99868",
+      "appointmentNo": 2,
+      "appointmentTime": "8pm+0 min",
+      "appointmentDate": "09/30/2024"
+    },
+    {
+      "_id": "669ec3f12ca1721683f90dcf",
+      "appid": "4bf0fcc8-d886-49b4-a696-c159d6fab44f",
+      "appointmentNo": 3,
+      "appointmentTime": "8pm+0 min",
+      "appointmentDate": "09/30/2024"
+    }
+  ],
+  "finishedPatients": [
+    {
+      "_id": "669ec3952ca1721683f90dcc",
+      "appid": "2109af2b-1a4a-4542-a248-b111698f3536",
+      "appointmentNo": 1,
+      "appointmentTime": "8pm+0 min",
+      "appointmentDate": "07/26/2024"
+    },
+    {
+      "_id": "669ec3d92ca1721683f90dce",
+      "appid": "5fd3509e-c6dd-4c0d-861c-4237267c61d9",
+      "appointmentNo": 2,
+      "appointmentTime": "8pm+0 min",
+      "appointmentDate": "07/26/2024"
+    },
+    {
+      "_id": "669ec3f12ca1721683f90dcf",
+      "appid": "eba71ab4-9a83-409f-a8f7-e58658911965",
+      "appointmentNo": 3,
+      "appointmentTime": "8pm+0 min",
+      "appointmentDate": "07/26/2024"
+    }
+  ],
+  "hospitalName": "Fortis Hospital"
+}]
