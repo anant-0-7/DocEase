@@ -59,6 +59,7 @@ This project is a web-based application designed to facilitate the appointment b
   - **Username:** `patient2`
     - Password: `password789`
   - **Username:** `patient3`
+    - Password: `password321`    
 
 - **Doctors:**
   - **Username:** `doctor1`
@@ -66,6 +67,7 @@ This project is a web-based application designed to facilitate the appointment b
   - **Username:** `doctor2`
     - Password: `hashedpassword321`
   - **Username:** `doctor3`
+    -Password: `hashedpassword789` 
 
 
 ### For Patients
