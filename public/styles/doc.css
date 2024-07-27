@@ -1,8 +1,11 @@
 #container{
     display: flex;
     margin-top: 50px;
-    justify-content: space-evenly;
+    gap: 20px;
+    justify-content: space-around;
     text-align: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px ;
 }
 
 .bold{
