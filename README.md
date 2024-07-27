@@ -27,7 +27,7 @@ This project is a web-based application designed to facilitate the appointment b
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/yourusername/CodeCubicle.git
+   git clone https://github.com/anant-0-7/CodeCubicle.git
    ```
 
 2. **Navigate to the project directory:**
@@ -67,7 +67,7 @@ This project is a web-based application designed to facilitate the appointment b
   - **Username:** `doctor2`
     - Password: `hashedpassword321`
   - **Username:** `doctor3`
-    -Password: `hashedpassword789` 
+    - Password: `hashedpassword789` 
 
 
 ### For Patients
