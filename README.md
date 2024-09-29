@@ -27,12 +27,12 @@ This project is a web-based application designed to facilitate the appointment b
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/anant-0-7/CodeCubicle.git
+   git clone https://github.com/anant-0-7/DocEase.git
    ```
 
 2. **Navigate to the project directory:**
    ```sh
-   cd patient-appointment-system
+   cd DocEase
    ```
 
 3. **Install dependencies:**
